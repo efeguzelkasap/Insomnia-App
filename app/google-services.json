@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "181058366014",
+    "firebase_url": "https://insomniafinal-c2a16.firebaseio.com",
+    "project_id": "insomniafinal-c2a16",
+    "storage_bucket": "insomniafinal-c2a16.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:181058366014:android:aae3533b3857309f8dff6f",
+        "android_client_info": {
+          "package_name": "com.example.insomniafinal"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "181058366014-b5cj9j1ko5cs6s6g913dmc2kkk809mhb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCcOcpBPtPqMPy5Ny3LskdHnmAFK_ZlJYU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "181058366014-b5cj9j1ko5cs6s6g913dmc2kkk809mhb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
