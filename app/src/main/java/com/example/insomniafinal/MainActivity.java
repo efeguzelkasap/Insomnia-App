@@ -102,15 +102,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         months.add("Sat");
         months.add("Sun");
 
-
-
-
         populateChart();
-
-
-
-
-
 
         // initialize our alarm manager
         alarm_manager = (AlarmManager) getSystemService(ALARM_SERVICE);
