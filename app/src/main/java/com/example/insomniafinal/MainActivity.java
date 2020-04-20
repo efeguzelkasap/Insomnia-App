@@ -24,6 +24,7 @@ import androidx.appcompat.widget.Toolbar;
 
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
 import com.anychart.AnyChart;
 import com.anychart.AnyChartView;
@@ -50,6 +51,7 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.ismaeldivita.chipnavigation.ChipNavigationBar;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -77,7 +79,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
    // List<DataEntry> data;
     //String[] months = new String[] {"Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"};
     ArrayList<String> months = new ArrayList<>();
-
+    ChipNavigationBar chipNavigationBar;
 
 
     @Override
@@ -85,6 +87,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        chipNavigationBar = findViewById(R.id.navBar);
         setSupportActionBar(toolbar);
         this.context = this;
 
@@ -102,7 +105,39 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         months.add("Sat");
         months.add("Sun");
 
+        chipNavigationBar.setOnItemSelectedListener(new ChipNavigationBar.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(int i) {
+
+                Fragment fragment = null;
+
+                switch(i)
+                {
+
+                    case R.id.home:
+                        fragment = new HomeFragment();
+                        break;
+
+                    case R.id.discover:
+                        fragment = new InformationFragment();
+                        break;
+
+                    case R.id.account:
+                        fragment = new AccountFragment();
+                        break;
+
+                    case R.id.diary:
+                        fragment = new DiaryFragment();
+                        break;
+
+                }
+
+            }
+        });
+
         populateChart();
+
+
 
         // initialize our alarm manager
         alarm_manager = (AlarmManager) getSystemService(ALARM_SERVICE);
@@ -225,7 +260,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 int mins = elapsedSeconds/60;
                 float hours = mins/60;
 
-                documentReference.update("sleep", FieldValue.arrayUnion(hours));
+                if(hours >= 1){
+                    documentReference.update("sleep", FieldValue.arrayUnion(hours));
+                }
 
 
                 // stop the ringtone
@@ -258,11 +295,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
                         List<DataEntry> data = new ArrayList<>();
 
-
-
                         for(int i = 0; i < totalSleep.size(); i++)
                         {
-                            data.add(new ValueDataEntry(months.get(i), totalSleep.get(i).intValue()));
+                            data.add(new ValueDataEntry(i, totalSleep.get(i).intValue()));
                         }
 
                         AnyChartView anyChartView = findViewById(R.id.any_chart_view);
@@ -300,7 +335,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                                 List<DataEntry> data = new ArrayList<>();
                                 for(int i = 0; i < totalSleep.size(); i++)
                                 {
-                                    data.add(new ValueDataEntry(months.get(i), totalSleep.get(i).intValue()));
+                                    data.add(new ValueDataEntry("Day " + (i+1), totalSleep.get(i).intValue()));
                                 }
                                 cartesian.data(data);
 
@@ -308,7 +343,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                             }
                         };
                         handler.postDelayed(runnable, delayMillis);
-
 
                     }
                 }
@@ -335,9 +369,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
+//        if (id == R.id.action_settings) {
+//            return true;
+//        }
 
         return super.onOptionsItemSelected(item);
     }

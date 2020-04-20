@@ -1,10 +1,42 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
+    app:cnb_unselectedColor="#fff"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:context="anna.whalealarmclock.MainActivity">
+    xmlns:tools="http://schemas.android.com/tools">
+
     <item
-        android:id="@+id/action_settings"
-        android:orderInCategory="100"
-        android:title="@string/action_settings"
-        app:showAsAction="never" />
+        android:id="@+id/home"
+        android:icon="@drawable/ic_account"
+        android:title="Home"
+        app:cnb_iconColor="#fff"
+        app:cnb_textColor="#fff"
+        app:cnb_backgroundColor="#ff785b"
+        />
+
+    <item
+        android:id="@+id/discover"
+        android:icon="@drawable/ic_account"
+        android:title="Discover"
+        app:cnb_iconColor="#fff"
+        app:cnb_textColor="#fff"
+        app:cnb_backgroundColor="#ff785b"
+        />
+
+    <item
+        android:id="@+id/account"
+        android:icon="@drawable/ic_account"
+        android:title="Account"
+        app:cnb_iconColor="#fff"
+        app:cnb_textColor="#fff"
+        app:cnb_backgroundColor="#ff785b"
+        />
+
+    <item
+        android:id="@+id/diary"
+        android:icon="@drawable/ic_account"
+        android:title="Diary"
+        app:cnb_iconColor="#fff"
+        app:cnb_textColor="#fff"
+        app:cnb_backgroundColor="#ff785b"
+        />
+
 </menu>
