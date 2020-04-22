@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <item
-        android:id="@+id/home"
+        android:id="@+id/education"
         android:icon="@drawable/ic_account"
         android:title="Home"
         app:cnb_iconColor="#fff"
@@ -13,18 +13,9 @@
         />
 
     <item
-        android:id="@+id/discover"
+        android:id="@+id/home"
         android:icon="@drawable/ic_account"
         android:title="Discover"
-        app:cnb_iconColor="#fff"
-        app:cnb_textColor="#fff"
-        app:cnb_backgroundColor="#ff785b"
-        />
-
-    <item
-        android:id="@+id/account"
-        android:icon="@drawable/ic_account"
-        android:title="Account"
         app:cnb_iconColor="#fff"
         app:cnb_textColor="#fff"
         app:cnb_backgroundColor="#ff785b"
@@ -38,5 +29,7 @@
         app:cnb_textColor="#fff"
         app:cnb_backgroundColor="#ff785b"
         />
+
+
 
 </menu>

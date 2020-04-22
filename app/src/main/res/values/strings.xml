@@ -3,7 +3,7 @@
     <string name="action_settings">Settings</string>
 
     <string-array name="whale_array">
-        <item>Pick a whale sound!</item>
+        <item>Pick a sound!</item>
         <item>Humpback bubble net</item>
         <item>Humpback contact Call Moo</item>
         <item>Humpback contact Call Whup</item>
@@ -18,5 +18,8 @@
         <item>Killer whale resident</item>
         <item>Killer whale transient</item>
     </string-array>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>
