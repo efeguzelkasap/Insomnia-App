@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
 
         chipNavigationBar = findViewById(R.id.navBar);
 
-
+        //Initialise the fragments for first time.
         if (savedInstanceState == null) {
             chipNavigationBar.setItemSelected(R.id.home, true);
             fragmentManager = getSupportFragmentManager();
@@ -43,6 +43,8 @@ public class MainActivity extends AppCompatActivity {
             fragmentManager.beginTransaction().add(R.id.fragment_container, homeFragment).commit();
         }
 
+        //Switch between fragments.
+        //Instead of replacing fragment we hide the fragments we are not using and show the one we are to save on performance.
         chipNavigationBar.setOnItemSelectedListener(new ChipNavigationBar.OnItemSelectedListener() {
             @Override
             public void onItemSelected(int i) {

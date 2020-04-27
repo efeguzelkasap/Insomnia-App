@@ -45,7 +45,6 @@ public class DisplayPost extends AppCompatActivity {
             } else {
                 //Get values from other activity.
                 newString = extras.getString("g");
-
                 position = extras.getInt("p");
             }
         } else {

@@ -17,7 +17,7 @@ public class Alarm_Receiver  extends BroadcastReceiver {
 
         // fetch the extra longs from the intent
         // tells the app which value the user picked from the drop down menu/spinner
-        Integer get_your_whale_choice = intent.getExtras().getInt("whale_choice");
+        Integer alarm_choice = intent.getExtras().getInt("sound");
 
         // create an intent to the ringtone service
         Intent service_intent = new Intent(context, RingtonePlayingService.class);
@@ -26,7 +26,7 @@ public class Alarm_Receiver  extends BroadcastReceiver {
         // pass the extra string from Receiver to the Ringtone Playing Service
         service_intent.putExtra("extra", get_your_string);
         // pass the extra integer from the Receiver to the Ringtone Playing Service
-        service_intent.putExtra("whale_choice", get_your_whale_choice);
+        service_intent.putExtra("sound", alarm_choice);
 
         // start the ringtone service
         context.startService(service_intent);

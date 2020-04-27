@@ -6,7 +6,7 @@
     <item
         android:id="@+id/education"
         android:icon="@drawable/ic_account"
-        android:title="Home"
+        android:title="Education"
         app:cnb_iconColor="#fff"
         app:cnb_textColor="#fff"
         app:cnb_backgroundColor="#ff785b"
@@ -15,7 +15,7 @@
     <item
         android:id="@+id/home"
         android:icon="@drawable/ic_account"
-        android:title="Discover"
+        android:title="Home"
         app:cnb_iconColor="#fff"
         app:cnb_textColor="#fff"
         app:cnb_backgroundColor="#ff785b"

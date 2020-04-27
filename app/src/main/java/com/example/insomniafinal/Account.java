@@ -37,10 +37,12 @@ public class Account extends AppCompatActivity {
         fAuth = FirebaseAuth.getInstance();
         fStore = FirebaseFirestore.getInstance();
 
+        //If there is a user.
         if(fAuth.getCurrentUser() != null)
         {
             userId = fAuth.getCurrentUser().getUid();
 
+            //Gte user data and add to text views.
             DocumentReference documentReference = fStore.collection("users").document(userId);
             documentReference.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
                 @Override

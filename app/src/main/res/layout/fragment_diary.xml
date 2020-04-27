@@ -36,7 +36,6 @@
         android:background="@drawable/custom_button"
         android:fontFamily="@font/autour_one"
         android:text="Submit"
-        android:textColor="#0E0D0D"
         app:layout_constraintBottom_toTopOf="@+id/SCROLLER_ID"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -5,14 +5,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="16dp"
-    android:paddingLeft="16dp"
-    android:paddingRight="16dp"
-    android:paddingTop="16dp"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.example.insomniafinal.HomeFragment"
     tools:showIn="@layout/activity_main"
-    android:background="#fff">
+    android:background="#121212">
 
     <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"

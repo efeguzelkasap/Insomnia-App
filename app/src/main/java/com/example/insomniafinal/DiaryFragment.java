@@ -95,7 +95,7 @@ public class DiaryFragment extends Fragment {
         populateList();
         listView.setAdapter(listAdapter);
 
-        // When submit button plessed firestore array updated with new value and the list is populated with the new value.
+        // When submit button pressed firestore array updated with new value and the list is populated with the new value.
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -107,7 +107,7 @@ public class DiaryFragment extends Fragment {
                     usersEmotions.add(newEntry);
                     listView.setAdapter(listAdapter);
 
-                    // Add new values inputed by user and add the currentEmotion at the end to parse later on for retreival of that number.
+                    // Add new values inputed by user.
                     documentReference.update("posts", FieldValue.arrayUnion(newEntry));
 
 
@@ -205,7 +205,7 @@ public class DiaryFragment extends Fragment {
         }
     }
 
-    // PopulateList gets the data from the array in firestore and populates the values array to populate and update the pie chart.
+    // PopulateList gets the data from the array in firestore and populates the values array to populate and update the bar chart.
     protected void populateList() {
         listAdapter.clear();
 

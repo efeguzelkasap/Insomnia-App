@@ -4,6 +4,7 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -34,6 +35,7 @@ import com.anychart.AnyChartView;
 import com.anychart.chart.common.dataentry.DataEntry;
 import com.anychart.chart.common.dataentry.ValueDataEntry;
 import com.anychart.charts.Cartesian;
+import com.anychart.core.SeriesBase;
 import com.anychart.core.cartesian.series.Column;
 import com.anychart.enums.Anchor;
 import com.anychart.enums.HoverMode;
@@ -65,7 +67,7 @@ public class HomeFragment extends Fragment {
     TextView update_text;
     Context context;
     PendingIntent pending_intent;
-    int choose_whale_sound;
+    int sound;
     long startTime = 0;
     long start = 0;
     float numberOfHours = 0;
@@ -93,7 +95,6 @@ public class HomeFragment extends Fragment {
         Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
         chipNavigationBar = view.findViewById(R.id.navBar);
         ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
-        //this.context = this;
         ((AppCompatActivity) getActivity()).getSupportActionBar().hide();
 
         firebaseAuth = FirebaseAuth.getInstance();
@@ -103,27 +104,17 @@ public class HomeFragment extends Fragment {
 
         populateChart();
 
-        // initialize our alarm manager
         alarm_manager = (AlarmManager) getContext().getSystemService(Context.ALARM_SERVICE);
-
-        //initialize our timepicker
         alarm_timepicker = (TimePicker) view.findViewById(R.id.timePicker);
-
-        //initialize our text update box
         update_text = (TextView) view.findViewById(R.id.update_text);
 
-        // create an instance of a calendar
         final Calendar calendar = Calendar.getInstance();
-
-        // create an intent to the Alarm Receiver class
         final Intent my_intent = new Intent(getActivity(), Alarm_Receiver.class);
 
-
-        // create the spinner in the main UI
         Spinner spinner = (Spinner) view.findViewById(R.id.richard_spinner);
-        // Create an ArrayAdapter using the string array and a default spinner layout
+        //Again the editor is not picking up on the alarm_sounds array in strings.xml or the custom format of the array adapter.
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(),
-                R.array.whale_array, android.R.layout.simple_spinner_item);
+                R.array.alarm_sounds, R.layout.custom_textview);
         // Specify the layout to use when the list of choices appears
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // Apply the adapter to the spinner
@@ -132,7 +123,7 @@ public class HomeFragment extends Fragment {
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                choose_whale_sound = (int) id;
+                sound = (int) id;
             }
 
             @Override
@@ -142,7 +133,6 @@ public class HomeFragment extends Fragment {
         });
 
 
-        // initialize start button
         Button alarm_on = (Button) view.findViewById(R.id.alarm_on);
 
         // create an onClick listener to start the alarm
@@ -174,6 +164,7 @@ public class HomeFragment extends Fragment {
                     minute_string = "0" + String.valueOf(minute);
                 }
 
+                //Account for the fact that the time could be in the past.
                 if(calendar.before(Calendar.getInstance()))
                 {
                     calendar.add(Calendar.DATE,1);
@@ -188,8 +179,8 @@ public class HomeFragment extends Fragment {
 
                 // put in an extra int into my_intent
                 // tells the clock that you want a certain value from the drop-down menu/spinner
-                my_intent.putExtra("whale_choice", choose_whale_sound);
-                Log.e("The whale id is" , String.valueOf(choose_whale_sound));
+                my_intent.putExtra("sound", sound);
+
 
                 // create a pending intent that delays the intent
                 // until the specified calendar time
@@ -206,10 +197,9 @@ public class HomeFragment extends Fragment {
 
         });
 
-        // initialize the stop button
         Button alarm_off = (Button) view.findViewById(R.id.alarm_off);
-        // create an onClick listener to stop the alarm or undo an alarm set
 
+        // create an onClick listener to stop the alarm or undo an alarm set
         alarm_off.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -228,7 +218,7 @@ public class HomeFragment extends Fragment {
                 my_intent.putExtra("extra", "alarm off");
                 // also put an extra int into the alarm off section
                 // to prevent crashes in a Null Pointer Exception
-                my_intent.putExtra("whale_choice", choose_whale_sound);
+                my_intent.putExtra("sound", sound);
 
                 //Get duration of the alarm.
                 long end = System.currentTimeMillis();
@@ -267,7 +257,7 @@ public class HomeFragment extends Fragment {
                 if (task.isSuccessful()) {
                     DocumentSnapshot document = task.getResult();
                     if (document.exists()) {
-                        //Gets array from firestore and assign those values to userEmotions list.
+                        //Gets array from firestore and assign those values to totalsleep list.
                         totalSleep = (ArrayList<Number>) document.get("sleep");
 
                         final Cartesian cartesian = AnyChart.column();
@@ -283,6 +273,7 @@ public class HomeFragment extends Fragment {
 
                         Column column = cartesian.column(data);
 
+                        //Simple formating of the chart and its axis.
                         column.tooltip()
                                 .titleFormat("{%X}")
                                 .position(Position.CENTER_BOTTOM)
@@ -293,20 +284,20 @@ public class HomeFragment extends Fragment {
 
                         cartesian.animation(true);
                         cartesian.title("Total Sleep");
-
                         cartesian.yScale().minimum(0d);
-
-                        //cartesian.yAxis(0).labels().format("${%Value}{groupsSeparator: }");
-
                         cartesian.tooltip().positionMode(TooltipPositionMode.POINT);
                         cartesian.interactivity().hoverMode(HoverMode.BY_X);
 
                         cartesian.xAxis(0).title("Day");
                         cartesian.yAxis(0).title("Sleep");
+                        anyChartView.setBackgroundColor("#121212");
+                        cartesian.background().fill("#121212");
+                        column.fill("#fff");
+
 
                         anyChartView.setChart(cartesian);
 
-                        // Updates pie chart values with new values after a delete or add operation.
+                        // Updates bar chart values with new values after a refresh.
                         final int delayMillis = 500;
                         final Handler handler = new Handler();
                         final Runnable runnable = new Runnable() {

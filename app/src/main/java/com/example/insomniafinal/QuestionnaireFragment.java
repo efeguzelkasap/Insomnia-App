@@ -21,11 +21,6 @@ public class QuestionnaireFragment extends Fragment {
     View view;
     TextView resultsLabel;
     Button submitButton;
-    RadioGroup radioGroupOne;
-    RadioGroup radioGroupTwo;
-    RadioGroup radioGroupThree;
-    RadioGroup radioGroupFour;
-    RadioGroup radioGroupFive;
     RadioButton alwaysOne, SometimesOne, NeutralOne, AlmostNeverOne, NeverOne;
     RadioButton alwaysTwo, sometimesTwo, NeutralTwo, AlmostNeverTwo, NeverTwo;
     RadioButton alwaysThree, sometimesThree, NeutralThree, AlmostNeverThree, NeverThree;
@@ -84,33 +79,10 @@ public class QuestionnaireFragment extends Fragment {
 
         submitButton = view.findViewById(R.id.submitButton);
 
+        //Too many possibilities so feedback from questionaire will be based on the answer from one question whitch is the "i have difficulty getting to sleep".
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(alwaysOne.isChecked() && alwaysTwo.isChecked() && alwaysThree.isChecked() && alwaysFour.isChecked() && alwaysFive.isChecked() && alwaysSix.isChecked())
-                {
-                    resultsLabel.setText("You should learn more about your sleep and how much getting a good nights sleep can do for you.");
-                }
-
-                if(SometimesOne.isChecked() && sometimesTwo.isChecked() && sometimesThree.isChecked() && sometimesFour.isChecked() && sometimesFive.isChecked() && sometimesSix.isChecked())
-                {
-                    resultsLabel.setText("Maybe you should try working on some of your pre sleep rituals and sleeping habits.");
-                }
-
-                if(NeutralOne.isChecked() && NeutralTwo.isChecked() && NeutralThree.isChecked() && NeutralFour.isChecked() && NeutralFive.isChecked() && NeutralSix.isChecked())
-                {
-                    resultsLabel.setText("Maybe you should try working on some of your pre sleep rituals and sleeping habits.");
-                }
-
-                if(AlmostNeverOne.isChecked() && AlmostNeverTwo.isChecked() && AlmostNeverThree.isChecked() && AlmostNeverFour.isChecked() && AlmostNeverFive.isChecked() && AlmostNeverSix.isChecked())
-                {
-                    resultsLabel.setText("Maybe you should try working on some of your pre sleep rituals and sleeping habits.");
-                }
-
-                if(NeverOne.isChecked() && NeverTwo.isChecked() && NeverThree.isChecked() && NeverFour.isChecked() && NeverFive.isChecked() && NeverSix.isChecked())
-                {
-                    resultsLabel.setText("Everything seems to be good regarding your sleep.");
-                }
 
                 if(alwaysFive.isChecked())
                 {

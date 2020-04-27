@@ -37,6 +37,7 @@ public class Register extends AppCompatActivity {
     FirebaseFirestore fStore;
     String userID;
     ArrayList<Integer> userSleep;
+    ArrayList<String> posts;
 
 
     @Override
@@ -55,6 +56,8 @@ public class Register extends AppCompatActivity {
         fStore = FirebaseFirestore.getInstance();
         progressBar = findViewById(R.id.progressBar);
         userSleep = new ArrayList();
+        posts = new ArrayList<>();
+
 
         if(fAuth.getCurrentUser() != null){
             startActivity(new Intent(getApplicationContext(),MainActivity.class));
@@ -87,8 +90,7 @@ public class Register extends AppCompatActivity {
 
                 progressBar.setVisibility(View.VISIBLE);
 
-                // register the user in firebase
-
+                // register the user in firebase and create arrays for use later on in the application.
                 fAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
@@ -101,6 +103,7 @@ public class Register extends AppCompatActivity {
                             user.put("email",email);
                             user.put("phone",phone);
                             user.put("sleep", userSleep);
+                            user.put("posts", posts);
                             documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void aVoid) {
