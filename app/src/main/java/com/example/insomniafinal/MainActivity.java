@@ -19,6 +19,10 @@ public class MainActivity extends AppCompatActivity {
 
     ChipNavigationBar chipNavigationBar;
     FragmentManager fragmentManager;
+    HomeFragment homeFragment;
+    DiaryFragment diaryFragment;
+    EducationFragment educationFragment;
+    QuestionnaireFragment questionnaireFragment;
 
 
     @Override
@@ -32,47 +36,158 @@ public class MainActivity extends AppCompatActivity {
         if (savedInstanceState == null) {
             chipNavigationBar.setItemSelected(R.id.home, true);
             fragmentManager = getSupportFragmentManager();
-            HomeFragment homeFragment = new HomeFragment();
-            fragmentManager.beginTransaction().replace(R.id.fragment_container, homeFragment).commit();
+            homeFragment = new HomeFragment();
+            diaryFragment = new DiaryFragment();
+            educationFragment = new EducationFragment();
+            questionnaireFragment = new QuestionnaireFragment();
+            fragmentManager.beginTransaction().add(R.id.fragment_container, homeFragment).commit();
         }
 
         chipNavigationBar.setOnItemSelectedListener(new ChipNavigationBar.OnItemSelectedListener() {
             @Override
             public void onItemSelected(int i) {
 
-                Fragment fragment = null;
-
                 switch (i) {
 
                     case R.id.education:
-
-                        fragment = new EducationFragment();
+                        displayEducationFragment();
                         break;
 
                     case R.id.home:
-                        fragment = new HomeFragment();
+                        displayHomeFragment();
                         break;
 
                     case R.id.diary:
-                        fragment = new DiaryFragment();
+                        displayDiaryFragment();
                         break;
 
+                    case R.id.Question:
+                        displayQuestionnaireFragment();
+                        break;
                 }
-
-                if (fragment != null) {
-
-
-                    fragmentManager = getSupportFragmentManager();
-                    fragmentManager.beginTransaction().replace(R.id.fragment_container, fragment).commit();
-
-                    Log.e("TAG", "Main Activity");
-                } else {
-                    Log.e("TAG", "Error in creating fragment");
-                }
-
             }
         });
+    }
 
+    protected void displayHomeFragment()
+    {
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+
+        if (homeFragment.isAdded())
+        {
+            ft.show(homeFragment);
+            ft.hide(educationFragment);
+            ft.hide(diaryFragment);
+            ft.hide(questionnaireFragment);
+        }
+        else
+        {
+            ft.add(R.id.fragment_container, homeFragment);
+            ft.show(homeFragment);
+        }
+
+        if(homeFragment.isHidden())
+        {
+            ft.show(homeFragment);
+            ft.hide(educationFragment);
+            ft.hide(diaryFragment);
+            ft.hide(questionnaireFragment);
+        }
+
+        ft.commit();
+
+    }
+
+    protected void displayDiaryFragment()
+    {
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+
+        if(diaryFragment.isAdded())
+        {
+            ft.show(diaryFragment);
+            ft.hide(educationFragment);
+            ft.hide(homeFragment);
+            ft.hide(questionnaireFragment);
+        }
+        else
+        {
+            ft.add(R.id.fragment_container, diaryFragment);
+            ft.show(diaryFragment);
+            ft.hide(homeFragment);
+            ft.hide(educationFragment);
+            ft.hide(questionnaireFragment);
+        }
+
+        if(diaryFragment.isHidden())
+        {
+            ft.show(diaryFragment);
+            ft.hide(educationFragment);
+            ft.hide(homeFragment);
+            ft.hide(questionnaireFragment);
+        }
+
+        ft.commit();
+
+    }
+
+    protected void displayEducationFragment()
+    {
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        if (educationFragment.isAdded())
+        {
+            ft.show(educationFragment);
+            ft.hide(homeFragment);
+            ft.hide(diaryFragment);
+            ft.hide(questionnaireFragment);
+        }
+        else
+        {
+            ft.add(R.id.fragment_container, educationFragment);
+            ft.show(educationFragment);
+            ft.hide(homeFragment);
+            ft.hide(diaryFragment);
+            ft.hide(questionnaireFragment);
+        }
+
+        if(educationFragment.isHidden())
+        {
+            ft.show(educationFragment);
+            ft.hide(homeFragment);
+            ft.hide(diaryFragment);
+            ft.hide(questionnaireFragment);
+        }
+
+        ft.commit();
+    }
+
+    protected void displayQuestionnaireFragment()
+    {
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        if (questionnaireFragment.isAdded())
+        {
+            ft.show(questionnaireFragment);
+            ft.hide(homeFragment);
+            ft.hide(diaryFragment);
+            ft.hide(educationFragment);
+        }
+        else
+        {
+            ft.add(R.id.fragment_container, questionnaireFragment);
+            ft.show(questionnaireFragment);
+            ft.hide(homeFragment);
+            ft.hide(diaryFragment);
+            ft.hide(educationFragment);
+        }
+
+        if(questionnaireFragment.isHidden())
+        {
+            ft.show(questionnaireFragment);
+            ft.hide(homeFragment);
+            ft.hide(diaryFragment);
+            ft.hide(educationFragment);
+        }
+
+        ft.commit();
     }
 
 

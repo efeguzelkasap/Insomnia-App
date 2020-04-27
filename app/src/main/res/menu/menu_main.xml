@@ -30,6 +30,15 @@
         app:cnb_backgroundColor="#ff785b"
         />
 
+    <item
+        android:id="@+id/Question"
+        android:icon="@drawable/ic_account"
+        android:title="Questionnaire"
+        app:cnb_iconColor="#fff"
+        app:cnb_textColor="#fff"
+        app:cnb_backgroundColor="#ff785b"
+        />
+
 
 
 </menu>

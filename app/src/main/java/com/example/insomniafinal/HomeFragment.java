@@ -76,15 +76,9 @@ public class HomeFragment extends Fragment {
     String userID;
 
     ArrayList<Number> totalSleep = new ArrayList<>();
-    // List<DataEntry> data;
-    //String[] months = new String[] {"Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"};
-    ArrayList<String> months = new ArrayList<>();
     ChipNavigationBar chipNavigationBar;
-    FragmentManager fragmentManager;
     View view;
-    boolean allowRefresh = true;
-    Fragment tempFragment = this;
-    FragmentTransaction fragmentTransaction;
+
 
     public HomeFragment() {
         // Required empty public constructor
@@ -102,23 +96,12 @@ public class HomeFragment extends Fragment {
         //this.context = this;
         ((AppCompatActivity) getActivity()).getSupportActionBar().hide();
 
-
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseFirestore = FirebaseFirestore.getInstance();
         userID = firebaseAuth.getCurrentUser().getUid();
         documentReference = firebaseFirestore.collection("users").document(userID);
 
-
-
-
-        Log.e("TAG", "On create called");
-
-
-
-
         populateChart();
-
-
 
         // initialize our alarm manager
         alarm_manager = (AlarmManager) getContext().getSystemService(Context.ALARM_SERVICE);
@@ -133,7 +116,7 @@ public class HomeFragment extends Fragment {
         final Calendar calendar = Calendar.getInstance();
 
         // create an intent to the Alarm Receiver class
-        final Intent my_intent = new Intent(getContext(), Alarm_Receiver.class);
+        final Intent my_intent = new Intent(getActivity(), Alarm_Receiver.class);
 
 
         // create the spinner in the main UI
@@ -210,7 +193,7 @@ public class HomeFragment extends Fragment {
 
                 // create a pending intent that delays the intent
                 // until the specified calendar time
-                pending_intent = PendingIntent.getBroadcast(getContext(), 0,
+                pending_intent = PendingIntent.getBroadcast(getActivity(), 0,
                         my_intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
                 // set the alarm manager
@@ -235,7 +218,10 @@ public class HomeFragment extends Fragment {
                 set_alarm_text("Alarm off!");
 
                 // cancel the alarm
-                alarm_manager.cancel(pending_intent);
+                if(pending_intent != null)
+                {
+                    alarm_manager.cancel(pending_intent);
+                }
 
                 // put extra string into my_intent
                 // tells the clock that you pressed the "alarm off" button
@@ -258,8 +244,6 @@ public class HomeFragment extends Fragment {
 
                 // stop the ringtone
                 getContext().sendBroadcast(my_intent);
-
-                //TODO: Update chart will firestore values.
 
                 numberOfHours = startTime / 1000;
 
@@ -399,8 +383,6 @@ public class HomeFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        populateChart();
-        Log.e("TAG", "OnResume");
 
     }
 

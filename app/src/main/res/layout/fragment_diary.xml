@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#121212"
     tools:context=".DiaryFragment">
 
 
@@ -18,8 +19,8 @@
         android:fontFamily="@font/autour_one"
         android:hint="What did you dream about?"
         android:inputType="textPersonName"
-        android:textColor="#0A0909"
-        android:textColorHint="#0F0E0E"
+        android:textColor="#fff"
+        android:textColorHint="#fff"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -63,24 +64,24 @@
             android:layout_marginTop="9dp"
             android:layout_marginEnd="30dp"
             android:scrollbars="vertical"
-            android:textColor="@android:color/white" />
+            android:textColor="#fff" />
     </ScrollView>
 
 
-                <FrameLayout
-        android:id="@+id/fragment_container"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+<!--                <FrameLayout-->
+<!--        android:id="@+id/fragment_container"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent">-->
 
-            <com.ismaeldivita.chipnavigation.ChipNavigationBar
-                android:id="@+id/navBar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_gravity="bottom"
-                android:background="@drawable/rounded"
-                app:cnb_menuResource="@menu/menu_main" />
-        </FrameLayout>
+<!--            <com.ismaeldivita.chipnavigation.ChipNavigationBar-->
+<!--                android:id="@+id/navBar"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_alignParentBottom="true"-->
+<!--                android:layout_gravity="bottom"-->
+<!--                android:background="@drawable/rounded"-->
+<!--                app:cnb_menuResource="@menu/menu_main" />-->
+<!--        </FrameLayout>-->
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

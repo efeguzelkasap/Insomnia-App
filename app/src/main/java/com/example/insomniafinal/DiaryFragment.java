@@ -88,7 +88,9 @@ public class DiaryFragment extends Fragment {
         fStore = FirebaseFirestore.getInstance();
         userID = fAuth.getCurrentUser().getUid();
         documentReference = fStore.collection("users").document(userID);
-        listAdapter = new ArrayAdapter(getContext(), android.R.layout.simple_list_item_1, usersEmotions);
+        //Ignore error. Instead of using simple_list_item_1 we create our own custom view so we can change text color.
+        //The IDE is showing an error for some reason when it works exactly as intended(possibly a bug).
+        listAdapter = new ArrayAdapter(getContext(), R.layout.custom_textview, usersEmotions);
 
         populateList();
         listView.setAdapter(listAdapter);
