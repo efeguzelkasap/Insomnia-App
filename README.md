@@ -1,5 +1,5 @@
 # Insomnia-App
-Android applicaiton to treat insomnia.
+Android application to treat insomnia.
 
 This application uses firebase to store user information.
 Users can keep track of how much sleep they get.
