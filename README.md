@@ -1,4 +1,4 @@
-# Insomnia-App
+# Insomnia
 Android application to treat insomnia.
 
 This application uses firebase to store user information.
