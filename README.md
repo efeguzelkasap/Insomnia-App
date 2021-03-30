@@ -13,5 +13,5 @@ Features:
   Sleep-Diary
   
   
-
+![Information](https://user-images.githubusercontent.com/13931384/112933520-e9ef9500-9117-11eb-85b9-2e53a42b2f18.png)
 
